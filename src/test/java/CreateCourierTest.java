@@ -17,10 +17,6 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class CreateCourierTest {
     CourierData courier;
-    @Before
-    public void setUp()  {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
-    }
 
     @After
             public void cleanUp() {

@@ -5,7 +5,7 @@ import io.restassured.response.ValidatableResponse;
 
 import static io.restassured.RestAssured.given;
 
-public class CourierApi {
+public class CourierApi extends RestApi {
     public static final String COURIER_URI = "/api/v1/courier";
     public static final String LOGIN_COURIER_URI = "/api/v1/courier/login";
 
@@ -13,7 +13,7 @@ public class CourierApi {
     public ValidatableResponse createCourier(CourierData courier) {
         return
                 given()
-                        .header("Content-type", "application/json")
+                        .spec(requestSpecification())
                         .and()
                         .body(courier)
                         .when()
@@ -25,7 +25,7 @@ public class CourierApi {
 @Step("get Courier Id")
     public GetCourierId getCourierId(CourierData courier) {
         GetCourierId courierId = given()
-                .header("Content-type", "application/json")
+                .spec(requestSpecification())
                 .body(courier)
                 .post(LOGIN_COURIER_URI)
                 .body().as(GetCourierId.class);
@@ -34,7 +34,7 @@ public class CourierApi {
 @Step("clean Up Courier")
     public void cleanUpCourier(GetCourierId courierId) {
         given()
-                .header("Content-type", "application/json")
+                .spec(requestSpecification())
                 .when()
                 .delete(COURIER_URI + "/"+courierId.getId().toString())
                 .then()
@@ -50,7 +50,7 @@ public class CourierApi {
 @Step("get Courier Id Response")
     public ValidatableResponse getCourierIdResponse(CourierData courier) {
         return given()
-                .header("Content-type", "application/json")
+                .spec(requestSpecification())
                 .and()
                 .body(courier)
                 .when()

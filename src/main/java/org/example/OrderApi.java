@@ -6,7 +6,7 @@ import io.restassured.response.ValidatableResponse;
 
 import static io.restassured.RestAssured.given;
 
-public class OrderApi {
+public class OrderApi extends RestApi {
 
     public static final String ORDERS_URI = "/api/v1/orders";
     public static final String CANCEL_ORDER_URI = "/api/v1/orders/cancel";
@@ -14,7 +14,7 @@ public class OrderApi {
 @Step("create Order")
     public Response createOrder(OrderData order) {
         return given()
-                .header("Content-type", "application/json")
+                .spec(requestSpecification())
                 .and()
                 .body(order)
                 .when()
@@ -27,7 +27,7 @@ public class OrderApi {
         response.body().as(GetOrderTrack.class);
 
         given()
-                .header("Content-type", "application/json")
+                .spec(requestSpecification())
                 .and()
                 .body(orderTrack)
                 .when()

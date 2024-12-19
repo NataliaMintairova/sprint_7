@@ -24,7 +24,7 @@ public class CreateOrderDifferentColoursParamTest {
         this.scooterColour = scooterColour;
     }
 
-    @Parameterized.Parameters()
+    @Parameterized.Parameters(name = "ScootersColour = {0}")
     public static Object[][] getScooterColour() {
         String[] allColours = {"BLACK", "GREY"};
         String[] blackColour = {"BLACK"};
@@ -39,9 +39,10 @@ public class CreateOrderDifferentColoursParamTest {
         };
     }
 
-    @Before
-    public void setUp()  {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
+    @After
+    public void cleanUpOrder() {
+        OrderApi orderApi = new OrderApi();
+        orderApi.cleanUpOrder(response);
     }
 
     @Test

@@ -15,11 +15,6 @@ public class CantCourierLogInWithErrorFieldTest {
     CourierData courier1;
     CourierData courier2;
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
-    }
-
     @After
     public void cleanUp() {
         CourierApi courierApi = new CourierApi();
